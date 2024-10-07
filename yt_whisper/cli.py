@@ -43,10 +43,11 @@ def main():
     model = whisper.load_model(model_name)
     audios = get_audio(args.pop("video"))
     break_lines = args.pop("break_lines")
+    prompt = input("Input initial prompt: ")
 
     for title, audio_path in audios.items():
         warnings.filterwarnings("ignore")
-        result = model.transcribe(audio_path, **args)
+        result = model.transcribe(audio_path, initial_prompt=prompt, **args)
         warnings.filterwarnings("default")
 
         if (subtitles_format == 'vtt'):
